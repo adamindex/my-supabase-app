@@ -1,0 +1,16 @@
+Generating 10000 profiles...
+
+--- Benchmark Results (Simulated 10k Records) ---
+Scenario: Comparing "SELECT *" (with extra simulated columns) vs "SELECT id, username, full_name"
+
+[SELECT *]
+Payload Size: 9.43 MB
+Serialization Time: 47.10 ms
+Deserialization Time: 149.50 ms
+
+[SELECT id, username, full_name]
+Payload Size: 0.93 MB
+Serialization Time: 11.24 ms
+Deserialization Time: 31.77 ms
+
+Impact: Payload size reduced by 90.11%
