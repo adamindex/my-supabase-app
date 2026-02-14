@@ -13,7 +13,7 @@ export default async function Home() {
   const supabase = await createClient();
   const { data: profiles, error } = await supabase
     .from('profiles')
-    .select('*')
+    .select('id, username, full_name')
     .range(0, 9);
 
   if (error) {
