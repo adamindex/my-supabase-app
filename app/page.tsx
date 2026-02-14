@@ -11,7 +11,10 @@ import {
 
 export default async function Home() {
   const supabase = await createClient();
-  const { data: profiles, error } = await supabase.from('profiles').select('*');
+  const { data: profiles, error } = await supabase
+    .from('profiles')
+    .select('*')
+    .range(0, 9);
 
   if (error) {
     console.error('Error fetching profiles:', error);
