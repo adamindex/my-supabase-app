@@ -1,21 +1,8 @@
-import { createClient } from '@/utils/supabase/server';
-import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table"
+import { createClient } from '@/utils/supabase/server'
+import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 
 export default async function Home() {
-  const supabase = await createClient();
-  const { data: profiles, error } = await supabase.from('profiles').select('*');
-
-  if (error) {
-    console.error('Error fetching profiles:', error);
-  }
+  const { data: profiles } = await (await createClient()).from('profiles').select('*')
 
   return (
     <div className="container mx-auto py-10">
@@ -30,14 +17,13 @@ export default async function Home() {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {profiles?.map((profile) => (
-            <TableRow key={profile.id}>
-              <TableCell className="font-medium">{profile.id}</TableCell>
-              <TableCell>{profile.username}</TableCell>
-              <TableCell>{profile.full_name}</TableCell>
+          {profiles?.length ? profiles.map(({ id, username, full_name }) => (
+            <TableRow key={id}>
+              <TableCell className="font-medium">{id}</TableCell>
+              <TableCell>{username}</TableCell>
+              <TableCell>{full_name}</TableCell>
             </TableRow>
-          ))}
-          {!profiles?.length && (
+          )) : (
             <TableRow>
               <TableCell colSpan={3} className="text-center">No profiles found.</TableCell>
             </TableRow>
@@ -45,5 +31,5 @@ export default async function Home() {
         </TableBody>
       </Table>
     </div>
-  );
+  )
 }
