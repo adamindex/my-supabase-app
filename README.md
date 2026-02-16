@@ -1,36 +1,128 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Supabase Next.js Application
+
+A modern, type-safe Next.js application with Supabase integration.
+
+## Project Structure
+
+```
+.
+├── app/                      # Next.js app directory
+│   ├── layout.tsx           # Root layout
+│   └── page.tsx             # Home page
+├── components/              # React components
+│   ├── profiles/           # Profile-related components
+│   │   └── profiles-table.tsx
+│   └── ui/                 # Reusable UI components
+│       ├── error-message.tsx
+│       └── table.tsx
+├── lib/                    # Utility libraries
+│   ├── api/               # API layer
+│   │   └── profiles.ts   # Profile data fetching
+│   ├── config.ts         # Environment configuration
+│   ├── constants.ts      # Application constants
+│   └── utils.ts         # Utility functions
+├── types/                 # TypeScript type definitions
+│   └── database.ts       # Database types
+├── utils/supabase/       # Supabase client utilities
+│   ├── client.ts        # Browser client
+│   └── server.ts        # Server client
+└── supabase/            # Supabase configuration
+    └── migrations/      # Database migrations
+
+```
+
+## Architecture Decisions
+
+### Type Safety
+- TypeScript types for database schema (`types/database.ts`)
+- Generic types for Supabase clients
+- Strongly typed API responses
+
+### Separation of Concerns
+- **API Layer** (`lib/api/`): Data fetching logic separated from UI
+- **Components** (`components/`): Reusable, presentational components
+- **Utils** (`utils/`): Client initialization and shared utilities
+
+### Error Handling
+- Centralized error handling in API layer
+- User-friendly error display components
+- Proper error logging
+
+### Configuration
+- Environment variable validation (`lib/config.ts`)
+- Type-safe configuration access
+- Clear error messages for missing env vars
+
+### Code Organization
+- Feature-based component organization
+- Shared UI components in `components/ui/`
+- Constants and configuration separated from logic
 
 ## Getting Started
 
-First, run the development server:
+1. Install dependencies:
+```bash
+npm install
+# or
+bun install
+```
 
+2. Set up environment variables:
+```bash
+cp .env.example .env.local
+```
+
+Add your Supabase credentials:
+```
+NEXT_PUBLIC_SUPABASE_URL=your-project-url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
+```
+
+3. Run the development server:
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
 # or
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. Open [http://localhost:3000](http://localhost:3000)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run start` - Start production server
+- `npm run lint` - Run ESLint
 
-## Learn More
+## Key Features
 
-To learn more about Next.js, take a look at the following resources:
+- ✅ Type-safe Supabase integration
+- ✅ Server-side rendering with Next.js 14+
+- ✅ Reusable component library
+- ✅ Error boundary and handling
+- ✅ Environment validation
+- ✅ Clean architecture with separation of concerns
+- ✅ Pagination support
+- ✅ Responsive design with Tailwind CSS
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Development Guidelines
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Adding a New Feature
 
-## Deploy on Vercel
+1. **Define types** in `types/` if needed
+2. **Create API functions** in `lib/api/`
+3. **Build UI components** in `components/`
+4. **Use components** in `app/` pages
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Best Practices
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Always use the centralized config for environment variables
+- Extract reusable logic into utility functions
+- Keep components small and focused
+- Use TypeScript for type safety
+- Handle errors gracefully
+- Write descriptive comments for complex logic
+
+## License
+
+MIT
